@@ -99,14 +99,13 @@ class AmoApi {
   }
 
   //get lead by id
-  static Future<Map<String, dynamic>> getLeadById(
-      int id, Token token, AmoApiSettings settings,
+  static Future<Map<String, dynamic>> getLeadById(int id, Token token,
       {bool withContact = false}) async {
     if (token.accessToken == null) {
       throw Exception('Access token is null');
     }
     var url =
-        'https://${settings.hostUrl}/api/v4/leads/$id${withContact ? 'with=contacts' : ''}';
+        'https://${token.amoApiSettings.hostUrl}/api/v4/leads/$id${withContact ? 'with=contacts' : ''}';
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
