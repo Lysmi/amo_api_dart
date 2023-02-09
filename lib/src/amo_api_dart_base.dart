@@ -31,13 +31,21 @@ class AmoApi {
   static Future<Token> getAccessTokenFromRefreshToken(Token token) async {
     String url = "https://${token.amoApiSettings.hostUrl}/oauth2/access_token";
 
-    final response = await http.post(Uri.parse(url), body: {
-      'grant_type': 'refresh_token',
-      'client_id': token.amoApiSettings.clientId,
-      'client_secret': token.amoApiSettings.clientSecret,
-      "redirect_uri": token.amoApiSettings.redirectUri,
-      'refresh_token': token.refreshToken,
-    });
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+    };
+
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'grant_type': 'refresh_token',
+        'client_id': token.amoApiSettings.clientId,
+        'client_secret': token.amoApiSettings.clientSecret,
+        "redirect_uri": token.amoApiSettings.redirectUri,
+        'refresh_token': token.refreshToken,
+      },
+      headers: headers,
+    );
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -59,6 +67,10 @@ class AmoApi {
       throw Exception('You haven`t Authorization Code');
     }
 
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+    };
+
     String url = "https://${token.amoApiSettings.hostUrl}/oauth2/access_token";
 
     Map<String, String> body = {
@@ -69,7 +81,8 @@ class AmoApi {
       "redirect_uri": token.amoApiSettings.redirectUri,
     };
 
-    var response = await http.post(Uri.parse(url), body: body);
+    var response =
+        await http.post(Uri.parse(url), body: body, headers: headers);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
@@ -100,7 +113,7 @@ class AmoApi {
       'Authorization': 'Bearer ${token.accessToken}'
     };
     // Make a request to the AmoCRM API to get the lead with the given ID
-    var response = await http.get(Uri.parse(url));
+    var response = await http.get(Uri.parse(url), headers: headers);
 
     // Parse the response and return the lead data
     if (response.statusCode == 200) {
