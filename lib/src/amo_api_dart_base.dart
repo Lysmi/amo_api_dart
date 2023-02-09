@@ -37,13 +37,13 @@ class AmoApi {
 
     final response = await http.post(
       Uri.parse(url),
-      body: {
+      body: jsonEncode({
         'grant_type': 'refresh_token',
         'client_id': token.amoApiSettings.clientId,
         'client_secret': token.amoApiSettings.clientSecret,
         "redirect_uri": token.amoApiSettings.redirectUri,
         'refresh_token': token.refreshToken,
-      },
+      }),
       headers: headers,
     );
 
@@ -81,8 +81,8 @@ class AmoApi {
       "redirect_uri": token.amoApiSettings.redirectUri,
     };
 
-    var response =
-        await http.post(Uri.parse(url), body: body, headers: headers);
+    var response = await http.post(Uri.parse(url),
+        body: jsonEncode(body), headers: headers);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
