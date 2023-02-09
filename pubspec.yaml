@@ -3,6 +3,8 @@ description: A starting point for Dart libraries or applications.
 version: 1.0.0
 # homepage: https://www.example.com
 
+repository: 'https://github.com/Lysmi/amo_api_dart'
+
 environment:
   sdk: '>=2.18.6 <3.0.0'
 
