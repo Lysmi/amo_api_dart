@@ -32,7 +32,7 @@ class AmoApi {
     String url = "https://${token.amoApiSettings.hostUrl}/oauth2/access_token";
 
     Map<String, String> headers = {
-      'Content-type': 'application/json',
+      'Content-Type': 'application/json',
     };
 
     final response = await http.post(
@@ -68,7 +68,7 @@ class AmoApi {
     }
 
     Map<String, String> headers = {
-      'Content-type': 'application/json',
+      'Content-Type': 'application/json',
     };
 
     String url = "https://${token.amoApiSettings.hostUrl}/oauth2/access_token";
@@ -109,7 +109,7 @@ class AmoApi {
         'https://${settings.hostUrl}/api/v4/leads/$id${withContact ? 'with=contacts' : ''}';
 
     Map<String, String> headers = {
-      'Content-type': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer ${token.accessToken}'
     };
     // Make a request to the AmoCRM API to get the lead with the given ID
