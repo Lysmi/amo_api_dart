@@ -105,7 +105,7 @@ class AmoApi {
       throw Exception('Access token is null');
     }
     var url =
-        'https://${token.amoApiSettings.hostUrl}/api/v4/leads/$id${withContact ? 'with=contacts' : ''}';
+        'https://${token.amoApiSettings.hostUrl}/api/v4/leads/$id${withContact ? '?with=contacts' : ''}';
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
