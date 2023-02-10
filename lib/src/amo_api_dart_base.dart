@@ -125,4 +125,31 @@ class AmoApi {
       }));
     }
   }
+
+  //get contact by id
+  static Future<Map<String, dynamic>> getContactById(int id, Token token,
+      {bool withContact = false}) async {
+    if (token.accessToken == null) {
+      throw Exception('Access token is null');
+    }
+    var url = 'https://${token.amoApiSettings.hostUrl}/api/v4/leads/$id';
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${token.accessToken}'
+    };
+    // Make a request to the AmoCRM API to get the contact with the given ID
+    var response = await http.get(Uri.parse(url), headers: headers);
+
+    // Parse the response and return the contact data
+    if (response.statusCode == 200) {
+      var leadData = jsonDecode(response.body);
+      return leadData;
+    } else {
+      throw Exception(jsonEncode({
+        'Error': 'Error to get contact',
+        'Responce': response.body,
+      }));
+    }
+  }
 }
