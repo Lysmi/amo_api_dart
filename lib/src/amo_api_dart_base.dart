@@ -132,7 +132,7 @@ class AmoApi {
     if (token.accessToken == null) {
       throw Exception('Access token is null');
     }
-    var url = 'https://${token.amoApiSettings.hostUrl}/api/v4/leads/$id';
+    var url = 'https://${token.amoApiSettings.hostUrl}/api/v4/contacts/$id';
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
